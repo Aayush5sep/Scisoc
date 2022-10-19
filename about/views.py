@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Contact
+from .models import Contact,Gallery
 from django.contrib import messages
 # Create your views here.
 
@@ -15,3 +15,7 @@ def addissue(request):
     if prob is not None:
         messages.success(request,"Contact Request/Issue Submiited. We will reply as soon as possible.")
     return redirect('about/contactpage/')
+
+def galleryview(request):
+    images=Gallery.objects.all()
+    return render(request,'',{'images':images})
