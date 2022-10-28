@@ -1,7 +1,3 @@
-from distutils.command.upload import upload
-from email.policy import default
-from enum import unique
-from turtle import title
 from django.db import models
 
 # Create your models here.
@@ -26,13 +22,16 @@ class fryums(models.Model):
     images=models.ImageField(upload_to='journal/fryums/',null=False,blank=False)
     desc=models.TextField(null=True,blank=True)
     link=models.URLField(null=True,blank=True)
+    importance=models.IntegerField(default=0)
     def __str__(self):
         return self.title
 
 class content(models.Model):
+    event=models.ForeignKey(event,on_delete=models.CASCADE)
     title=models.CharField(max_length=100)
     image=models.ImageField(upload_to='journal/content/')
     desc=models.TextField()
     link=models.URLField()
+    importance=models.IntegerField(default=0)
     def __str__(self):
         return self.title
